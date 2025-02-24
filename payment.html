@@ -234,36 +234,36 @@
         <button class="btn btn-primary mt-4" onclick="redirectToPayment()">Buy Now</button>
 
 
-    <script>
-        function makePayment(app) {
-            const upiId = 'example@upi'; // Replace with your UPI ID
-            const name = 'Your Name';    // Replace with your name or merchant name
-            const amount = '100';        // Amount to be paid
-            const transactionNote = 'Payment for Services';
-
-            // UPI Deep Link Format
-            const upiUrl = `upi://pay?pa=${upiId}&pn=${name}&am=${amount}&tn=${transactionNote}&cu=INR`;
-
-            let finalUrl = '';
-
-            // App-specific URLs
-            if (app === 'gpay') {
-                finalUrl = `intent://upi/pay?pa=${upiId}&pn=${name}&am=${amount}&tn=${transactionNote}&cu=INR#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end`;
-            } else if (app === 'phonepe') {
-                finalUrl = `intent://upi/pay?pa=${upiId}&pn=${name}&am=${amount}&tn=${transactionNote}&cu=INR#Intent;scheme=upi;package=com.phonepe.app;end`;
-            } else if (app === 'paytm') {
-                finalUrl = `intent://upi/pay?pa=${upiId}&pn=${name}&am=${amount}&tn=${transactionNote}&cu=INR#Intent;scheme=upi;package=net.one97.paytm;end`;
+        <script>
+            function makePayment(app) {
+                const upiId = 'example@upi'; // Replace with your UPI ID
+                const name = 'Your Name';    // Replace with your name or merchant name
+                const amount = '100';        // Amount to be paid
+                const transactionNote = 'Payment for Services';
+    
+                // Generic UPI link (system will handle the app selection)
+                const upiUrl = `upi://pay?pa=${upiId}&pn=${name}&am=${amount}&tn=${transactionNote}&cu=INR`;
+    
+                // Open specific app if selected, otherwise use UPI intent
+                let finalUrl = '';
+    
+                if (app === 'gpay') {
+                    finalUrl = `upi://pay?pa=${upiId}&pn=${name}&am=${amount}&tn=${transactionNote}&cu=INR&mc=0000&tr=1234567890&url=https://www.google.com`;
+                } else if (app === 'phonepe') {
+                    finalUrl = `upi://pay?pa=${upiId}&pn=${name}&am=${amount}&tn=${transactionNote}&cu=INR`;
+                } else if (app === 'paytm') {
+                    finalUrl = `upi://pay?pa=${upiId}&pn=${name}&am=${amount}&tn=${transactionNote}&cu=INR`;
+                }
+    
+                // Redirect directly to the UPI app
+                window.location.href = finalUrl;
+    
+                // Fallback if no UPI app is found or the link fails
+                setTimeout(() => {
+                    alert(`If the ${app} app did not open, please ensure it is installed and try again.`);
+                }, 2000);
             }
-
-            // Redirect to UPI App
-            window.location.href = finalUrl;
-
-            // Fallback Alert if app is not installed
-            setTimeout(() => {
-                alert(`If the ${app} app did not open, please ensure it is installed on your mobile device.`);
-            }, 2000);
-        }
-    </script>
+        </script>
 
 <script>
     function redirectToPayment() {
