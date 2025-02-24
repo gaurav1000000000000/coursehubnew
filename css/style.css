@@ -107,7 +107,7 @@
     gap: 15px; /* Increases space between navbar items */
 }
 .navbar {
-    background-color: #143cf0; /* Change to any color */
+    background-color: #5900ff;/* Change to any color */
 }
 
 
@@ -340,12 +340,12 @@
     height: 100%;
     opacity: 1;
     transition: .5s;
-}
+} */
 
 .services-item:hover .services-content-icon {
     position: relative;
     z-index: 2;
-} */
+}
 
 .services-item .services-content-icon i,
 .services-item .services-content-icon p {
