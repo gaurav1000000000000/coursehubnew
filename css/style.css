@@ -106,6 +106,12 @@
     padding: 10px 0;
     gap: 15px; /* Increases space between navbar items */
 }
+.navbar {
+    background-color: #143cf0; /* Change to any color */
+}
+
+
+
 
 .navbar .ms-auto {
     margin-right: 30px !important; /* Pushes the cart icon slightly to the right */
@@ -147,8 +153,9 @@
     position: absolute;
     top: 0;
     left: 0;
-    background: rgba(0, 0, 0, .6);
+    background: rgba(0, 0, 0, 0.6);
 }
+
 
 .carousel-caption {
     height: 100%;
@@ -319,7 +326,7 @@
     top: 0;
     left: 0;
     border-radius: 10px 10px 0 0;
-    background: rgba(3, 43, 243, 0.8);
+    background: rgba(243, 3, 231, 0.8);
     transition: .5s;
 }
 
@@ -329,7 +336,7 @@
     border-radius: 10px 10px 10px 10px;
 }
 
-.services-item:hover .services-content::after {
+/* .services-item:hover .services-content::after {
     height: 100%;
     opacity: 1;
     transition: .5s;
@@ -338,7 +345,7 @@
 .services-item:hover .services-content-icon {
     position: relative;
     z-index: 2;
-}
+} */
 
 .services-item .services-content-icon i,
 .services-item .services-content-icon p {
@@ -350,7 +357,7 @@
 }
 
 .services-item:hover .services-content-icon p {
-    color: var(--bs-white);
+    color: var(--bs-gr);
 }
 
 /*** Services End ***/
@@ -646,5 +653,8 @@
     background: var(--bs-secondary);
     border: 0;
 }
+
+
+
 
 /*** Footer End ***/
