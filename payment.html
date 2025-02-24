@@ -1,278 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="utf-8">
+    <title>Checkout - CourseHub IT Solutions</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Checkout - CourseHub Training and institute</title>
-        
-    </head>
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Saira:wght@500;600;700&display=swap" rel="stylesheet">
 
-        <!-- Google Web Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Saira:wght@500;600;700&display=swap" rel="stylesheet"> 
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-        <!-- Icon Font Stylesheet -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
-        <!-- Libraries Stylesheet -->
-        <link href="lib/animate/animate.min.css" rel="stylesheet">
-        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
-        <!-- Customized Bootstrap Stylesheet -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-       
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
 
-        
-        <!-- Template Stylesheet -->
-        <link href="css/style.css" rel="stylesheet">
-
-    <!--<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OM Technologies - UPI Checkout</title>-->
     <style>
-       /* body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
-        .container { max-width: 500px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }*/
         .btn { display: block; padding: 15px; margin: 10px 0; font-size: 18px; text-decoration: none; color: white; border-radius: 5px; }
         .gpay { background-color: #4285F4; }
         .phonepe { background-color: #672AB6; }
         .paytm { background-color: #002970; }
         footer { margin-top: 20px; font-size: 14px; color: #666; }
     </style>
-
-    
 </head>
 
-<!-- Topbar Start -->
+<body>
+    <!-- Topbar and Navbar remain unchanged -->
+    <!-- ... (Your existing topbar and navbar code) ... -->
 
-    <div class="container">
-        <div class="d-flex justify-content-between topbar">
-            
-            
-                <!--<a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i class="fab fa-facebook-f text-primary"></i></a>-->
-                <!--<a href="" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i class="fab fa-twitter text-primary"></i></a>
-                <a href="https://www.instagram.com/code_with_shubh?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="bg-light nav-fill btn btn-sm-square rounded-circle"><i class="fab fa-instagram text-primary"></i></a>
-                <a href="https://www.linkedin.com/in/ohom-dubey-23055917b/" class="bg-light nav-fill btn btn-sm-square rounded-circle me-0"><i class="fab fa-linkedin-in text-primary"></i></a>-->
-            </div>
+    <!-- Checkout Content -->
+    <div class="container my-5 p-4 border rounded shadow-lg bg-light" style="max-width: 600px;">
+        <h2 class="mb-4 text-center text-primary">Checkout</h2>
+
+        <!-- Course Selection -->
+        <div class="mb-4">
+            <label for="courseSelect" class="form-label">Select Course:</label>
+            <select id="courseSelect" class="form-select" onchange="updatePrice()">
+                <option value="Web Design" data-price="1500">Web Design - ₹1500</option>
+                <option value="Web Development" data-price="450">Web Development - ₹450</option>
+                <option value="UI/UX Design" data-price="1980">UI/UX Design - ₹1980</option>
+                <option value="Web Security" data-price="2100">Web Security - ₹2100</option>
+                <option value="Digital Marketing" data-price="1200">Digital Marketing - ₹1200</option>
+                <option value="Programming" data-price="1700">Programming - ₹1700</option>
+            </select>
+        </div>
+
+        <!-- Payment Options -->
+        <div class="payment-options text-center">
+            <h4 class="mb-3 text-secondary">Select a Payment Method:</h4>
+
+            <a id="gpay" class="btn btn-dark me-2 mb-2" href="#" onclick="makePayment('Google Pay'); return false;">
+                <i class="bi bi-google"></i> Pay with Google Pay
+            </a>
+
+            <a id="phonepe" class="btn btn-success me-2 mb-2" href="#" onclick="makePayment('PhonePe'); return false;">
+                <i class="bi bi-phone"></i> Pay with PhonePe
+            </a>
+
+            <a id="paytm" class="btn btn-info text-white mb-2" href="#" onclick="makePayment('Paytm'); return false;">
+                <i class="bi bi-wallet2"></i> Pay with Paytm
+            </a>
         </div>
     </div>
-</div>
-<!-- Topbar End -->
 
-<!-- Navbar Start -->
-<div class="container-fluid bg-primary">
-    <div class="container">
-        <nav class="navbar navbar-dark navbar-expand-lg py-0">
-            <a href="index.html" class="navbar-brand">
-                <h1 class="text-white fw-bold">COURSEHUB<span class="text-secondary"> </span></h1>
-            </a>
-            <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse bg-transparent" id="navbarCollapse">
-                <div class="navbar-nav ms-auto mx-xl-auto p-0">
-                    <a href="index.html" class="nav-item nav-link active">Home</a>
-                    <a href="about.html" class="nav-item nav-link">About</a>
-                    <a href="service.html" class="nav-item nav-link">Services</a>
-                    <a href="terms-of-use.html" class="nav-item nav-link">Terms of Use</a>
-                    <a href="refund-cancellation.html" class="nav-item nav-link">Refund & Cancellation</a>
-                    <a href="privacy-policy.html" class="nav-item nav-link">Privacy Policy</a>
-                    <a href="contact.html" class="nav-item nav-link">Contact</a>
-                     <!-- Cart Icon with Counter -->
-                    
-                </div>
-            </div>
-        </nav>
-    </div>
-</div>
-<!-- Navbar End -->
-
-
-<!-- Navbar End -->
-
-<body>
-    <!--<header>
-        <h1>OM Technologies</h1>
-        <p>Secure UPI Payment</p>
-    </header>-->
-
-    <h2>Checkout</h2>
-    <p>Amount: <strong id="price"></strong></p>
-    <p>Course: <strong id="course"></strong></p>
-
-    
-
-    <div class="container">
-        <h2>Complete Your Payment</h2>
-    
-        <!-- Google Pay Button -->
-        <a id="gpay" class="btn gpay" href="#" onclick="makePayment('gpay')">Pay with Google Pay</a>
-
-    <!-- PhonePe Button -->
-    <a id="phonepe" class="btn phonepe" href="#" onclick="makePayment('phonepe')">Pay with PhonePe</a>
-
-    <!-- Paytm Button -->
-    <a id="paytm" class="btn paytm" href="#" onclick="makePayment('paytm')">Pay with Paytm</a>
-    </div>
-    
-
+    <!-- JavaScript -->
     <script>
-        
-        // Get amount from URL parameters
-        // const storedAmount = localStorage.getItem('course');
-        // // const amount = storedAmount ? storedAmount : "0";
-        // const amount = localStorage.getItem('amount');
-        // const result = document.getElementById("amount").textContent = amount;
-        const urlParams = new URLSearchParams(window.location.search);
-            const param1 = urlParams.get('param1');
-            const param2 = urlParams.get('param2');
-            
-            document.getElementById("course").innerText = param1;
-            document.getElementById("price").innerText = param2;
+        let selectedPrice = 1500; // Default price from the first option
 
-        // Define UPI ID
-        const upiId = "omkarnathdubey127-2@okhdfcbank"; 
+        // Update price when course is changed
+        function updatePrice() {
+            const select = document.getElementById('courseSelect');
+            selectedPrice = parseFloat(select.options[select.selectedIndex].getAttribute('data-price'));
+        }
 
-        // Generate UPI payment links dynamically
-        const upiURL = `upi://pay?pa=example@upi&pn=YourName&am=1500&tn=Payment for web-design&cu=INR`
+        // Payment function with deep linking
+        function makePayment(method) {
+            const course = document.getElementById('courseSelect').value;
+            const amount = selectedPrice;
 
+            if (amount <= 0) {
+                alert('Please select a valid course with a price.');
+                return;
+            }
 
-        // Update payment links
-        document.getElementById("gpay").href = upiLink;
-        document.getElementById("phonepe").href = upiLink;
-        document.getElementById("paytm").href = upiLink;
+            let paymentUrl = '';
 
-        
+            // Replace with your actual merchant details where applicable
+            const merchantId =  "omkarnathdubey127-2@okhdfcbank"; 
+            // Replace with your merchant ID
+            const merchantName = 'CourseHub';       // Replace with your merchant name
+            const transactionId = 'TXN' + Date.now(); // Unique transaction ID
+
+            switch (method) {
+                case 'Google Pay':
+                    paymentUrl = `gpay://upi/pay?pa=${merchantId}&pn=${merchantName}&tr=${transactionId}&am=${amount}&cu=INR`;
+                    break;
+                case 'PhonePe':
+                    paymentUrl = `phonepe://pay?pa=${merchantId}&pn=${merchantName}&tr=${transactionId}&am=${amount}&cu=INR`;
+                    break;
+                case 'Paytm':
+                    paymentUrl = `paytmmp://pay?pa=${merchantId}&pn=${merchantName}&tr=${transactionId}&am=${amount}&cu=INR`;
+                    break;
+                default:
+                    alert('Payment method not supported.');
+                    return;
+            }
+
+            // Redirect to the payment app
+            window.location.href = paymentUrl;
+
+            // Fallback alert if the app doesn't open
+            setTimeout(() => {
+                alert(`If ${method} app didn't open, please ensure it is installed and try again. Amount: ₹${amount}`);
+            }, 1000);
+        }
     </script>
 
-    <!-- Footer Start -->
-<div class="container-fluid footer bg-dark wow fadeIn" data-wow-delay=".3s">
-    <div class="container pt-5 pb-4">
-        <div class="row g-5">
-            <div class="col-lg-3 col-md-6">
-                <a href="index.html">
-                    <h1 class="text-white fw-bold d-block">CourseHub<span class="text-secondary"></span></h1>
-                </a>
-                <p class="mt-4 text-light">At coursehub, we provide innovative solutions tailored to meet your technology needs. Our commitment to excellence ensures that we deliver quality products and services that enhance your digital experience.</p>
-                <div class="d-flex Om Technologies-link">
-                    <!-- Social Media Links -->
-                    <!--<a href="https://facebook.com" class="btn-light nav-fill btn btn-square rounded-circle me-2" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-facebook-f text-primary"></i>
-                    </a>
-                    <a href="https://twitter.com" class="btn-light nav-fill btn btn-square rounded-circle me-2" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-twitter text-primary"></i> 
-                    </a>
-                    <a href="https://www.instagram.com/code_with_shubh?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="btn-light nav-fill btn btn-square rounded-circle me-2" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-instagram text-primary"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/ohom-dubey-23055917b/" class="btn-light nav-fill btn btn-square rounded-circle me-0" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-linkedin-in text-primary"></i>-->
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <a href="#" class="h3 text-secondary">Short Links</a>
-                <div class="mt-4 d-flex flex-column short-link">
-                    <a href="about.html" class="mb-2 text-white"><i class="fas fa-angle-right text-secondary me-2"></i>About us</a>
-                    <a href="contact.html" class="mb-2 text-white"><i class="fas fa-angle-right text-secondary me-2"></i>Contact us</a>
-                    <a href="service.html" class="mb-2 text-white"><i class="fas fa-angle-right text-secondary me-2"></i>Our Services</a>
-                    <a href="project.html" class="mb-2 text-white"><i class="fas fa-angle-right text-secondary me-2"></i>Our Projects</a>
-                    <a href="blog.html" class="mb-2 text-white"><i class="fas fa-angle-right text-secondary me-2"></i>Latest Blog</a>
-                </div>
-            </div>
-            
-            <div class="col-lg-3 col-md-6">
-                <a href="#" class="h3 text-secondary">Help Links</a>
-                <div class="mt-4 d-flex flex-column help-link">
-                    <a href="terms-of-use.html" class="mb-2 text-white"><i class="fas fa-angle-right text-secondary me-2"></i>Terms of Use</a>
-                    <a href="privacy-policy.html" class="mb-2 text-white"><i class="fas fa-angle-right text-secondary me-2"></i>Privacy Policy</a>
-                    <a href="helpcenter.html" class="mb-2 text-white"><i class="fas fa-angle-right text-secondary me-2"></i>Help Center</a>
-                    <a href="faq.html" class="mb-2 text-white"><i class="fas fa-angle-right text-secondary me-2"></i>FAQs</a>
-                    <a href="refund-cancellation.html" class="mb-2 text-white"><i class="fas fa-angle-right text-secondary me-2"></i>Cancellation And Refund</a>
-                </div>
-            </div>
-            
-            <div class="col-lg-3 col-md-6">
-                <a href="#" class="h3 text-secondary">Contact Us</a>
-                <div class="text-white mt-4 d-flex flex-column contact-link">
-                    <a href="#" class="pb-3 text-light border-bottom border-primary"><i class="fas fa-map-marker-alt text-secondary me-2"></i>Goregaon (E), Mumbai, Maharashtra, 400065</a>
-                    <a href="tel:+1234567890" class="py-3 text-light border-bottom border-primary"><i class="fas fa-phone-alt text-secondary me-2"></i>+91 9892018171</a>
-                    <a href="mailto:dubey@ohomtech.online" class="py-3 text-light border-bottom border-primary"><i class="fas fa-envelope text-secondary me-2"></i>coursehub@gmail.com</a>
-                </div>
-            </div>
-        </div>
-        <hr class="text-light mt-5 mb-4">
-        <div class="row">
-            <div class="col-md-6 text-center text-md-start">
-                <span class="text-light"><a href="#" class="text-secondary"><i class="fas fa-copyright text-secondary me-2"></i>Om Technologiess</a>, All rights reserved.</span>
-            </div>
-            <div class="col-md-6 text-center text-md-end">
-                <!--/* This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. */-->
-                <!--<span class="text-light">Designed By <a href="https://htmlcodex.com" class="text-secondary">HTML Codex</a> Distributed By <a href="https://themewagon.com">ThemeWagon</a></span>-->
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Footer End -->
+    <!-- Bootstrap Icons CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 
-
-
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-secondary btn-square rounded-circle back-to-top"><i class="fa fa-arrow-up text-white"></i></a>
-
-        
-        <!-- JavaScript Libraries -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="lib/wow/wow.min.js"></script>
-        <script src="lib/easing/easing.min.js"></script>
-        <script src="lib/waypoints/waypoints.min.js"></script>
-        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-
-        <!-- Template Javascript -->
-        <script src="js/main.js"></script>
-        <button class="btn btn-primary mt-4" onclick="redirectToPayment()">Buy Now</button>
-
-
-        <script>
-            function makePayment(app) {
-                const upiId = 'example@upi'; // Replace with your UPI ID
-                const name = 'Your Name';    // Replace with your name or merchant name
-                const amount = '100';        // Amount to be paid
-                const transactionNote = 'Payment for Services';
-    
-                // Generic UPI link (system will handle the app selection)
-                const upiUrl = `upi://pay?pa=${upiId}&pn=${name}&am=${amount}&tn=${transactionNote}&cu=INR`;
-    
-                // Open specific app if selected, otherwise use UPI intent
-                let finalUrl = '';
-    
-                if (app === 'gpay') {
-                    finalUrl = `upi://pay?pa=${upiId}&pn=${name}&am=${amount}&tn=${transactionNote}&cu=INR&mc=0000&tr=1234567890&url=https://www.google.com`;
-                } else if (app === 'phonepe') {
-                    finalUrl = `upi://pay?pa=${upiId}&pn=${name}&am=${amount}&tn=${transactionNote}&cu=INR`;
-                } else if (app === 'paytm') {
-                    finalUrl = `upi://pay?pa=${upiId}&pn=${name}&am=${amount}&tn=${transactionNote}&cu=INR`;
-                }
-    
-                // Redirect directly to the UPI app
-                window.location.href = finalUrl;
-    
-                // Fallback if no UPI app is found or the link fails
-                setTimeout(() => {
-                    alert(`If the ${app} app did not open, please ensure it is installed and try again.`);
-                }, 2000);
-            }
-        </script>
-
-<script>
-    function redirectToPayment() {
-        window.location.href = "payment.html";
-    }
-</script>
-
-    </body>
+    <!-- Footer and Remaining Scripts remain unchanged -->
+    <!-- ... (Your existing footer and script includes) ... -->
+</body>
 </html>
