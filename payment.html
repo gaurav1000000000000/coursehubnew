@@ -103,6 +103,8 @@
     <p>Amount: <strong id="price"></strong></p>
     <p>Course: <strong id="course"></strong></p>
 
+    
+
     <div class="container">
         <h2>Complete Your Payment</h2>
     
@@ -135,7 +137,8 @@
         const upiId = "omkarnathdubey127-2@okhdfcbank"; 
 
         // Generate UPI payment links dynamically
-        const upiLink = `upi : //pay?pa=${upiId}&pn=OM%20Technologies&mc=0000&tid=${Date.now()}&tr=TXN${Date.now()}&tn=Payment&am=${amount}&cu=INR`;
+        const upiURL = `upi://pay?pa=example@upi&pn=YourName&am=1500&tn=Payment for web-design&cu=INR`
+
 
         // Update payment links
         document.getElementById("gpay").href = upiLink;
