@@ -106,14 +106,13 @@
     <div class="container">
         <h2>Complete Your Payment</h2>
     
-        <!-- Google Pay Button -->
-        <a id="gpay" class="btn gpay" href="https://payments.google.com/gp/w/home/paymentmethods" target="_blank">Pay with Google Pay</a>
-    
+        <a id="gpay" class="btn gpay" href="#" onclick="makePayment('googlepay')">Pay with Google Pay</a>
+
         <!-- PhonePe Button -->
-        <a id="phonepe" class="btn phonepe" href="https://www.phonepe.com/" target="_blank">Pay with PhonePe</a>
+        <a id="phonepe" class="btn phonepe" href="#" onclick="makePayment('phonepe')">Pay with PhonePe</a>
     
         <!-- Paytm Button -->
-        <a id="paytm" class="btn paytm" href="https://paytm.com/" target="_blank">Pay with Paytm</a>
+        <a id="paytm" class="btn paytm" href="#" onclick="makePayment('paytm')">Pay with Paytm</a>
     </div>
     
 
@@ -232,6 +231,29 @@
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
         <button class="btn btn-primary mt-4" onclick="redirectToPayment()">Buy Now</button>
+
+        <script>
+            function makePayment(app) {
+                const upiId = 'example@upi'; // Replace with your UPI ID
+                const name = 'Your Name'; // Replace with your name or merchant name
+                const amount = '100'; // Replace with the desired amount
+                const transactionNote = 'Payment for Services';
+    
+                const upiUrl = `upi://pay?pa=${upiId}&pn=${name}&am=${amount}&tn=${transactionNote}&cu=INR`;
+    
+                let finalUrl = '';
+    
+                if (app === 'googlepay') {
+                    finalUrl = `https://pay.google.com/gp/p/ui/pay?url=${encodeURIComponent(upiUrl)}`;
+                } else if (app === 'phonepe') {
+                    finalUrl = `https://phon.pe/upi?url=${encodeURIComponent(upiUrl)}`;
+                } else if (app === 'paytm') {
+                    finalUrl = `paytmmp://pay?url=${encodeURIComponent(upiUrl)}`;
+                }
+    
+                window.location.href = finalUrl;
+            }
+        </script>
 
 <script>
     function redirectToPayment() {
