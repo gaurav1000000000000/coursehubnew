@@ -45,12 +45,12 @@
         <div class="mb-4">
             <label for="courseSelect" class="form-label">Select Course:</label>
             <select id="courseSelect" class="form-select" onchange="updatePrice()">
-                <option value="Web Design" data-price="1500">Python Programming - ₹1</option>
+                <option value="Web Design" data-price="1500">Python Programming - ₹1500</option>
                 <option value="java Development" data-price="450">Java Development - ₹450</option>
                 <option value="Data science" data-price="1980">Data science - ₹1980</option>
                 <option value="cyber Security" data-price="2100">Cyber Security - ₹2100</option>
                 <option value="Digital Marketing" data-price="1200">Digital Marketing - ₹1200</option>
-                <option value="fullstack-development" data-price="1700">Full Stack Development - ₹1700</option>
+                <option value="Full stack development" data-price="1700">Full Stack Development - ₹1700</option>
             </select>
         </div>
 
@@ -74,7 +74,7 @@
 
     <!-- JavaScript -->
     <script>
-        let selectedPrice = 1; // Default price from the first option
+        let selectedPrice = 1500; // Default price from the first option
 
         // Update price when course is changed
         function updatePrice() {
@@ -84,41 +84,45 @@
 
         // Payment function with deep linking
         function makePayment(method) {
-    const course = document.getElementById('courseSelect').value;
-    const amount = selectedPrice;
+            const course = document.getElementById('courseSelect').value;
+            const amount = selectedPrice;
 
-    if (amount <= 0) {
-        alert('Please select a valid course with a price.');
-        return;
-    }
+            if (amount <= 0) {
+                alert('Please select a valid course with a price.');
+                return;
+            }
 
-    let paymentUrl = '';
-    const merchantId = "omkarnathdubey127-2@okhdfcbank"; // Replace with verified merchant ID
-    const merchantName = 'CourseHub';
-    const transactionId = 'TXN' + Date.now();
-    const merchantCode = ''; // Leave blank if not provided by bank; otherwise, add merchant code
+            let paymentUrl = '';
 
-    switch (method) {
-        case 'Google Pay':
-            paymentUrl = `gpay://upi/pay?pa=${merchantId}&pn=${encodeURIComponent(merchantName)}&tr=${transactionId}&am=${amount}&cu=INR&mc=${merchantCode}`;
-            break;
-        case 'PhonePe':
-            paymentUrl = `phonepe://pay?pa=${merchantId}&pn=${encodeURIComponent(merchantName)}&tr=${transactionId}&am=${amount}&cu=INR`;
-            break;
-        case 'Paytm':
-            paymentUrl = `paytmmp://pay?pa=${merchantId}&pn=${encodeURIComponent(merchantName)}&tr=${transactionId}&am=${amount}&cu=INR`;
-            break;
-        default:
-            alert('Payment method not supported.');
-            return;
-    }
+            // Replace with your actual merchant details where applicable
+            const merchantId =  "omkarnathdubey127-2@okhdfcbank"; 
+            // Replace with your merchant ID
+            const merchantName = 'CourseHub';       // Replace with your merchant name
+            const transactionId = 'TXN' + Date.now(); // Unique transaction ID
 
-    window.location.href = paymentUrl;
+            switch (method) {
+                case 'Google Pay':
+                    paymentUrl = `gpay://upi/pay?pa=${merchantId}&pn=${merchantName}&tr=${transactionId}&am=${amount}&cu=INR`;
+                    break;
+                case 'PhonePe':
+                    paymentUrl = `phonepe://pay?pa=${merchantId}&pn=${merchantName}&tr=${transactionId}&am=${amount}&cu=INR`;
+                    break;
+                case 'Paytm':
+                    paymentUrl = `paytmmp://pay?pa=${merchantId}&pn=${merchantName}&tr=${transactionId}&am=${amount}&cu=INR`;
+                    break;
+                default:
+                    alert('Payment method not supported.');
+                    return;
+            }
 
-    setTimeout(() => {
-        alert(`If ${method} app didn't open, please ensure it is installed and try again. Amount: ₹${amount}`);
-    }, 1000);
-}
+            // Redirect to the payment app
+            window.location.href = paymentUrl;
+
+            // Fallback alert if the app doesn't open
+            setTimeout(() => {
+                alert(`If ${method} app didn't open, please ensure it is installed and try again. Amount: ₹${amount}`);
+            }, 1000);
+        }
     </script>
 
     <!-- Bootstrap Icons CDN -->
