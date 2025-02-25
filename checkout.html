@@ -84,45 +84,41 @@
 
         // Payment function with deep linking
         function makePayment(method) {
-            const course = document.getElementById('courseSelect').value;
-            const amount = selectedPrice;
+    const course = document.getElementById('courseSelect').value;
+    const amount = selectedPrice;
 
-            if (amount <= 0) {
-                alert('Please select a valid course with a price.');
-                return;
-            }
+    if (amount <= 0) {
+        alert('Please select a valid course with a price.');
+        return;
+    }
 
-            let paymentUrl = '';
+    let paymentUrl = '';
+    const merchantId = "omkarnathdubey127-2@okhdfcbank"; // Replace with verified merchant ID
+    const merchantName = 'CourseHub';
+    const transactionId = 'TXN' + Date.now();
+    const merchantCode = ''; // Leave blank if not provided by bank; otherwise, add merchant code
 
-            // Replace with your actual merchant details where applicable
-            const merchantId =  "omkarnathdubey127-2@okhdfcbank"; 
-            // Replace with your merchant ID
-            const merchantName = 'CourseHub';       // Replace with your merchant name
-            const transactionId = 'TXN' + Date.now(); // Unique transaction ID
+    switch (method) {
+        case 'Google Pay':
+            paymentUrl = `gpay://upi/pay?pa=${merchantId}&pn=${encodeURIComponent(merchantName)}&tr=${transactionId}&am=${amount}&cu=INR&mc=${merchantCode}`;
+            break;
+        case 'PhonePe':
+            paymentUrl = `phonepe://pay?pa=${merchantId}&pn=${encodeURIComponent(merchantName)}&tr=${transactionId}&am=${amount}&cu=INR`;
+            break;
+        case 'Paytm':
+            paymentUrl = `paytmmp://pay?pa=${merchantId}&pn=${encodeURIComponent(merchantName)}&tr=${transactionId}&am=${amount}&cu=INR`;
+            break;
+        default:
+            alert('Payment method not supported.');
+            return;
+    }
 
-            switch (method) {
-                case 'Google Pay':
-                    paymentUrl = `gpay://upi/pay?pa=${merchantId}&pn=${merchantName}&tr=${transactionId}&am=${amount}&cu=INR`;
-                    break;
-                case 'PhonePe':
-                    paymentUrl = `phonepe://pay?pa=${merchantId}&pn=${merchantName}&tr=${transactionId}&am=${amount}&cu=INR`;
-                    break;
-                case 'Paytm':
-                    paymentUrl = `paytmmp://pay?pa=${merchantId}&pn=${merchantName}&tr=${transactionId}&am=${amount}&cu=INR`;
-                    break;
-                default:
-                    alert('Payment method not supported.');
-                    return;
-            }
+    window.location.href = paymentUrl;
 
-            // Redirect to the payment app
-            window.location.href = paymentUrl;
-
-            // Fallback alert if the app doesn't open
-            setTimeout(() => {
-                alert(`If ${method} app didn't open, please ensure it is installed and try again. Amount: ₹${amount}`);
-            }, 1000);
-        }
+    setTimeout(() => {
+        alert(`If ${method} app didn't open, please ensure it is installed and try again. Amount: ₹${amount}`);
+    }, 1000);
+}
     </script>
 
     <!-- Bootstrap Icons CDN -->
