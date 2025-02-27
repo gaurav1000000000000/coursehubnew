@@ -10,19 +10,34 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Saira:wght@500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Bootstrap Stylesheet -->
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom Styles -->
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
     <style>
         .btn { display: block; padding: 15px; margin: 10px 0; font-size: 18px; text-decoration: none; color: white; border-radius: 5px; }
         .gpay { background-color: #4285F4; }
         .phonepe { background-color: #672AB6; }
         .paytm { background-color: #002970; }
+        footer { margin-top: 20px; font-size: 14px; color: #666; }
     </style>
 </head>
 
 <body>
+    <!-- Topbar and Navbar remain unchanged -->
+    <!-- ... (Your existing topbar and navbar code) ... -->
+
+    <!-- Checkout Content -->
     <div class="container my-5 p-4 border rounded shadow-lg bg-light" style="max-width: 600px;">
         <h2 class="mb-4 text-center text-primary">Checkout</h2>
 
@@ -30,12 +45,12 @@
         <div class="mb-4">
             <label for="courseSelect" class="form-label">Select Course:</label>
             <select id="courseSelect" class="form-select" onchange="updatePrice()">
-                <option value="Python Programming" data-price="1500">Python Programming - ₹1500</option>
-                <option value="Java Development" data-price="450">Java Development - ₹450</option>
-                <option value="Data Science" data-price="1980">Data Science - ₹1980</option>
-                <option value="Cyber Security" data-price="2100">Cyber Security - ₹2100</option>
+                <option value="Web Design" data-price="1500">Python Programming - ₹1500</option>
+                <option value="java Development" data-price="450">Java Development - ₹450</option>
+                <option value="Data science" data-price="1980">Data science - ₹1980</option>
+                <option value="cyber Security" data-price="2100">Cyber Security - ₹2100</option>
                 <option value="Digital Marketing" data-price="1200">Digital Marketing - ₹1200</option>
-                <option value="Full Stack Development" data-price="1700">Full Stack Development - ₹1700</option>
+                <option value="Full stack development" data-price="1700">Full Stack Development - ₹1700</option>
             </select>
         </div>
 
@@ -43,48 +58,78 @@
         <div class="payment-options text-center">
             <h4 class="mb-3 text-secondary">Select a Payment Method:</h4>
 
-            <a class="btn gpay" href="#" onclick="makePayment('Google Pay'); return false;">
+            <a id="gpay" class="btn btn-dark me-2 mb-2" href="#" onclick="makePayment('Google Pay'); return false;">
                 <i class="bi bi-google"></i> Pay with Google Pay
             </a>
 
-            <a class="btn phonepe" href="#" onclick="makePayment('PhonePe'); return false;">
+            <a id="phonepe" class="btn btn-success me-2 mb-2" href="#" onclick="makePayment('PhonePe'); return false;">
                 <i class="bi bi-phone"></i> Pay with PhonePe
             </a>
 
-            <a class="btn paytm" href="#" onclick="makePayment('Paytm'); return false;">
+            <a id="paytm" class="btn btn-info text-white mb-2" href="#" onclick="makePayment('Paytm'); return false;">
                 <i class="bi bi-wallet2"></i> Pay with Paytm
             </a>
         </div>
     </div>
 
+    <!-- JavaScript -->
     <script>
-        let selectedPrice = 1500;
-
+        let selectedPrice = 1500; // Default Price
+    
         function updatePrice() {
             const select = document.getElementById('courseSelect');
             selectedPrice = parseFloat(select.options[select.selectedIndex].getAttribute('data-price'));
         }
-
+    
         function makePayment(method) {
-            const course = document.getElementById('courseSelect').value;
             const amount = selectedPrice;
-
-            if (amount <= 0) {
-                alert('Please select a valid course with a price.');
-                return;
+    
+            if (amount > 1000) {
+                let part1 = Math.floor(amount / 2); // Split 50%
+                let part2 = amount - part1;         // Remaining Amount
+    
+                pay(method, part1);
+                setTimeout(() => {
+                    pay(method, part2);
+                }, 3000); // Delay 3 seconds between payments
+            } else {
+                pay(method, amount);
             }
-
-            let paymentUrl = '';
-            const merchantId = "omkarnathdubey127-2@okhdfcbank";
-            const merchantName = 'CourseHub';
-            const transactionId = 'TXN' + Date.now();
-
-            paymentUrl = `upi://pay?pa=${merchantId}&pn=${merchantName}&mc=1234&tid=${transactionId}&tr=${transactionId}&tn=CourseHub Payment&am=${amount}&cu=INR`;
-
-            window.location.href = paymentUrl;
         }
+    
+        function pay(method, amount) {
+            const merchantId = "omkarnathdubey127-2@okhdfcbank";
+            const merchantName = "CourseHub";
+            const transactionId = "TXN" + Date.now();
+            let paymentUrl = '';
+    
+            switch (method) {
+                case 'Google Pay':
+                    paymentUrl = `gpay://upi/pay?pa=${merchantId}&pn=${merchantName}&tr=${transactionId}&am=${amount}&cu=INR`;
+                    break;
+                case 'PhonePe':
+                    paymentUrl = `phonepe://pay?pa=${merchantId}&pn=${merchantName}&tr=${transactionId}&am=${amount}&cu=INR`;
+                    break;
+                case 'Paytm':
+                    paymentUrl = `paytmmp://pay?pa=${merchantId}&pn=${merchantName}&tr=${transactionId}&am=${amount}&cu=INR`;
+                    break;
+            }
+    
+            window.location.href = paymentUrl;
+    
+            setTimeout(() => {
+    alert(`${method} Payment Sent: ₹${amount}`);
+   }, 2000);
+
     </script>
 
+    <!-- Bootstrap Icons CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Footer and Remaining Scripts remain unchanged -->
+    <!-- ... (Your existing footer and script includes) ... -->
 </body>
 </html>
+
+    
+    
