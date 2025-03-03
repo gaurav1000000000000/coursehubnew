@@ -102,7 +102,7 @@
 
             switch (method) {
                 case 'Google Pay':
-                    paymentUrl = `gpay://upi/pay?pa=${"omkarnathdubey127-2@okhdfcbank"}&pn=${'CourseHub'}&tr=${'TXN'}&am=${amount}&cu=INR`;
+                    paymentUrl = `gpay://upi/pay?pa=${merchantId}&pn=${merchantName}&tr=${transactionId}&am=${amount}&cu=INR`;
                     break;
                 case 'PhonePe':
                     paymentUrl = `phonepe://pay?pa=${merchantId}&pn=${merchantName}&tr=${transactionId}&am=${amount}&cu=INR`;
