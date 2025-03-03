@@ -74,39 +74,56 @@
 
     <!-- JavaScript -->
     <script>
-        let selectedPrice = 1500; // Default price
-    
+        let selectedPrice = 1500; // Default price from the first option
+
+        // Update price when course is changed
         function updatePrice() {
             const select = document.getElementById('courseSelect');
-            selectedPrice = select.options[select.selectedIndex].getAttribute('data-price');
+            selectedPrice = parseFloat(select.options[select.selectedIndex].getAttribute('data-price'));
         }
-    
+
+        // Payment function with deep linking
         function makePayment(method) {
             const course = document.getElementById('courseSelect').value;
             const amount = selectedPrice;
-    
-            if (!amount || amount <= 0) {
+
+            if (amount <= 0) {
                 alert('Please select a valid course with a price.');
                 return;
             }
-    
-            const upiId = "omkarnathdubey127-2@okhdfcbank"; // Correct UPI ID
-            const merchantName = "CourseHub";
-            const transactionId = "TXN" + Date.now(); // Unique transaction ID
-            const note = "Payment for " + course; // Transaction note
-    
-            let paymentUrl = `upi://pay?pa=${upiId}&pn=${merchantName}&tr=${transactionId}&tn=${note}&am=${amount}&cu=INR`;
-    
-            // Redirect to the UPI app
+
+            let paymentUrl = '';
+
+            // Replace with your actual merchant details where applicable
+            const merchantId =  "omkarnathdubey127-2@okhdfcbank"; 
+            // Replace with your merchant ID
+            const merchantName = 'CourseHub';       // Replace with your merchant name
+            const transactionId = 'TXN' + Date.now(); // Unique transaction ID
+
+            switch (method) {
+                case 'Google Pay':
+                    paymentUrl = `gpay://upi/pay?pa=${merchantId}&pn=${merchantName}&tr=${transactionId}&am=${amount}&cu=INR`;
+                    break;
+                case 'PhonePe':
+                    paymentUrl = `phonepe://pay?pa=${merchantId}&pn=${merchantName}&tr=${transactionId}&am=${amount}&cu=INR`;
+                    break;
+                case 'Paytm':
+                    paymentUrl = `paytmmp://pay?pa=${merchantId}&pn=${merchantName}&tr=${transactionId}&am=${amount}&cu=INR`;
+                    break;
+                default:
+                    alert('Payment method not supported.');
+                    return;
+            }
+
+            // Redirect to the payment app
             window.location.href = paymentUrl;
-    
-            // Alert if redirection fails
+
+            // Fallback alert if the app doesn't open
             setTimeout(() => {
-                alert(`If ${method} app didn't open, ensure it is installed and try again. Amount: ₹${amount}`);
+                alert(`If ${method} app didn't open, please ensure it is installed and try again. Amount: ₹${amount}`);
             }, 1000);
         }
     </script>
-    
 
     <!-- Bootstrap Icons CDN -->    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
